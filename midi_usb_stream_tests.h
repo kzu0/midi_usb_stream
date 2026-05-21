@@ -2,8 +2,16 @@
 #define MIDI_USB_STREAM_TESTS_H
 
 #include "midi_usb_stream.h"
-#include <random>
-#include <cstdio>
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define DATA_SIZE 71
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 static bool midi_usb_encoder_test() {
 
@@ -115,8 +123,6 @@ static bool midi_usb_encoder_test() {
      * Sys Ex
      * ---------------------------------------------------------------- */
 
-    constexpr uint32_t DATA_SIZE = 71;
-
     printf ("Test encoding / decoding sys ex message ... \n");
     printf ("Sys ex size: %d \n", DATA_SIZE);
 
@@ -190,5 +196,8 @@ static bool midi_usb_encoder_test() {
     return true;
 }
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif // MIDI_USB_STREAM_TESTS_H
