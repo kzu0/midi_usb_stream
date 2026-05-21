@@ -35,7 +35,7 @@ uint8_t midi_usb_decode_packet( midi_usb_stream_ctx_t *ctx, midi_usb_packet_t mi
     return len;
 }
 
-inline midi_usb_packet_t build_packet( uint8_t cn, uint8_t cin, uint8_t byte1, uint8_t byte2, uint8_t byte3 )
+static inline midi_usb_packet_t build_packet( uint8_t cn, uint8_t cin, uint8_t byte1, uint8_t byte2, uint8_t byte3 )
 {
     return (midi_usb_packet_t)(
         ((cn  & 0x0F) << 4 | (cin & 0x0F))  |
