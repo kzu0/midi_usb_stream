@@ -1,6 +1,6 @@
-#include "midi_usb_encoding.h"
+#include "midi_usb_stream.h"
 
-uint8_t midi_usb_decode_packet( midi_usb_encoder_ctx_t *ctx, midi_usb_packet_t midi_packet, uint8_t *midi_raw_data )
+uint8_t midi_usb_decode_packet( midi_usb_stream_ctx_t *ctx, midi_usb_packet_t midi_packet, uint8_t *midi_raw_data )
 {
     if ( !ctx || !midi_raw_data )
         return 0;
@@ -44,7 +44,7 @@ inline midi_usb_packet_t build_packet( uint8_t cn, uint8_t cin, uint8_t byte1, u
         ((uint32_t)byte3 << 24));
 }
 
-uint8_t midi_usb_encode_message( midi_usb_encoder_ctx_t *ctx, uint8_t *midi_raw_data, uint8_t midi_raw_length, midi_usb_packet_t *midi_packet )
+uint8_t midi_usb_encode_message( midi_usb_stream_ctx_t *ctx, uint8_t *midi_raw_data, uint8_t midi_raw_length, midi_usb_packet_t *midi_packet )
 {
     if ( !ctx || !midi_raw_data || ( midi_raw_length == 0) || !midi_packet )
         return 0;
@@ -116,7 +116,7 @@ uint8_t midi_usb_encode_message( midi_usb_encoder_ctx_t *ctx, uint8_t *midi_raw_
     return 0;
 }
 
-uint8_t midi_usb_encode_sysex( midi_usb_encoder_ctx_t *ctx, uint8_t byte, midi_usb_packet_t *midi_packet )
+uint8_t midi_usb_encode_sysex( midi_usb_stream_ctx_t *ctx, uint8_t byte, midi_usb_packet_t *midi_packet )
 {
     if ( !ctx || !midi_packet || ctx->cn >= USB_MIDI_MAX_CABLES )
         return 0;
@@ -203,7 +203,7 @@ uint8_t midi_usb_encode_sysex( midi_usb_encoder_ctx_t *ctx, uint8_t byte, midi_u
     return 0;
 }
 
-void midi_usb_init_ctx( midi_usb_encoder_ctx_t *ctx )
+void midi_usb_init_ctx( midi_usb_stream_ctx_t *ctx )
 {
     if ( !ctx )
         return;
